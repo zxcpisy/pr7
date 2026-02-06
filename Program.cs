@@ -17,7 +17,7 @@ namespace pr7kankan
     {
         static void Main(string[] args)
         {
-            WebRequest request = WebRequest.Create("");
+            WebRequest request = WebRequest.Create("https://lada-davauto.ru/?utm_source=yandex_direct&utm_medium=cpc&utm_campaign=ohvat3_poisk&utm_term=");
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             Console.WriteLine(response.StatusDescription);
             Stream dataStream = response.GetResponseStream();
@@ -31,11 +31,11 @@ namespace pr7kankan
         }
         public static void Singin(string Login, string Password)
         {
-            string url = "";
+            string url = "https://lada-davauto.ru/?utm_source=yandex_direct&utm_medium=cpc&utm_campaign=ohvat3_poisk&utm_term=";
             Debug.WriteLine($"Выполняем запрос: {url}");
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "POST";
-            request.ContentType = "";
+            request.ContentType = "application/x-www-form-urlencoded";
             request.CookieContainer = new CookieContainer();
             string postData = $"login={Login}&password={Password}";
             byte[] Data = Encoding.UTF8.GetBytes(postData);
@@ -51,7 +51,7 @@ namespace pr7kankan
         }
         public static void GetContent(Cookie Token)
         {
-            string url = "";
+            string url = "https://lada-davauto.ru/?utm_source=yandex_direct&utm_medium=cpc&utm_campaign=ohvat3_poisk&utm_term=";
             Debug.WriteLine($"Выполняем запрос: {url}");
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.CookieContainer = new CookieContainer();
@@ -67,7 +67,7 @@ namespace pr7kankan
             html.LoadHtml(htmlCode);
             var Document = html.DocumentNode;
             IEnumerable DivsNews = Document.Descendants(0).Where(n => n.HasClass("news"));
-            foreach(HtmlNode DivNews in DivsNews)
+            foreach (HtmlNode DivNews in DivsNews)
             {
                 var src = DivNews.ChildNodes[1].GetAttributeValue("src", "none");
                 var name = DivNews.ChildNodes[3].InnerText;
